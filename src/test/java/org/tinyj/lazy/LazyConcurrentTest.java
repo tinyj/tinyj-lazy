@@ -49,7 +49,7 @@ public class LazyConcurrentTest {
 
   @Test(timeOut = 500)
   public void if_actualization_raises_an_exception_it_falls_through_in_the_originating_thread() throws Exception {
-    Lazy<String> lazy = Lazy.lazy(() -> delayedReturn(1000, "value"));
+    Lazy<String> lazy = Lazy.lazy(() -> LazyConcurrentTest.<String, RuntimeException>delayedReturn(1000, "value"));
     Map<Thread, Throwable> uncaughtExceptions = new ConcurrentHashMap<>();
     Thread thread1 = new Thread(lazy::get);
     Thread thread2 = new Thread(lazy::get);
