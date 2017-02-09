@@ -1,7 +1,7 @@
 laguage: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 install:
-  - mvn package -P sonatype -D skipTests
+- mvn --settings travis-mvn-settings.xml -P sonatype package -D skipTests
 script:
-- mvn install -P sonatype
+- mvn --settings travis-mvn-settings.xml -P sonatype clean deploy
