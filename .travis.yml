@@ -4,4 +4,9 @@ jdk:
 install:
 - mvn --settings travis-mvn-settings.xml -P sonatype package -D skipTests
 script:
-- mvn --settings travis-mvn-settings.xml -P sonatype clean deploy
+- mvn --settings travis-mvn-settings.xml -P sonatype verify
+deploy:
+  provider: script
+  script: mvn --settings travis-mvn-settings.xml -P sonatype clean deploy
+  on:
+    branch: master
