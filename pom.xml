@@ -6,6 +6,26 @@
   <artifactId>lazy</artifactId>
   <version>0-SNAPSHOT</version>
 
+  <name>TinyJ WebMVC</name>
+  <description>A thread and exception safe implementation of lazy (aka on-demand) value initialization.</description>
+  <url>https://github.com/tinyj/tinyj-lazy</url>
+  <scm>
+    <url>https://github.com/tinyj/tinyj-lazy</url>
+  </scm>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Eric Karge</name>
+      <email>e.karge@struction.de</email>
+    </developer>
+  </developers>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
