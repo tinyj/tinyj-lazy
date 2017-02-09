@@ -198,7 +198,7 @@ public class LazyTest {
     return supplier;
   }
 
-  static <T, E extends Throwable> T raise(E e) throws E {
+  static <T, E extends RuntimeException> T raise(E e) throws E {
     throw e;
   }
 }
