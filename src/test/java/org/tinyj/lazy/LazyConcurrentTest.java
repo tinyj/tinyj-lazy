@@ -49,7 +49,7 @@ public class LazyConcurrentTest {
 
   @Test(timeOut = 500)
   public void if_actualization_raises_an_exception_it_falls_through_in_the_originating_thread() throws Exception {
-    Lazy<String> lazy = Lazy.lazy(() -> LazyConcurrentTest.<String, RuntimeException>delayedReturn(1000, "value"));
+    Lazy<String> lazy = Lazy.lazy(() -> unsafeDelayedReturn(1000, "value"));
     Map<Thread, Throwable> uncaughtExceptions = new ConcurrentHashMap<>();
     Thread thread1 = new Thread(lazy::get);
     Thread thread2 = new Thread(lazy::get);
@@ -73,7 +73,7 @@ public class LazyConcurrentTest {
 
   @Test(timeOut = 500)
   public void if_actualization_raises_an_exception_threads_other_than_the_originating_thread_receive_that_exception_wrapped_in_an_IllegalStateException() throws Exception {
-    Lazy<String> lazy = Lazy.lazy(() -> delayedReturn(1000, "value"));
+    Lazy<String> lazy = Lazy.lazy(() -> unsafeDelayedReturn(1000, "value"));
     Map<Thread, Throwable> uncaughtExceptions = new ConcurrentHashMap<>();
     Thread thread1 = new Thread(lazy::get);
     Thread thread2 = new Thread(lazy::get);
@@ -106,9 +106,13 @@ public class LazyConcurrentTest {
     // AssertionError expected
   }
 
-  private static <R, E extends Exception> R delayedReturn(int i, R value) throws E {
+  private static <R> R unsafeDelayedReturn(int delayInMillis, R value) {
+    return LazyConcurrentTest.<R, RuntimeException>delayedReturn(delayInMillis, value);
+  }
+
+  private static <R, E extends Exception> R delayedReturn(int delayInMillis, R value) throws E {
     try {
-      Thread.sleep(i);
+      Thread.sleep(delayInMillis);
       return value;
     } catch (InterruptedException e) {
       throw (E) e;
