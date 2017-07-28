@@ -4,7 +4,7 @@
 
   <groupId>org.tinyj.lazy</groupId>
   <artifactId>lazy</artifactId>
-  <version>0-SNAPSHOT</version>
+  <version>1.0.1</version>
 
   <name>TinyJ Lazy</name>
   <description>A thread and exception safe implementation of lazy (aka on-demand) value initialization.</description>
